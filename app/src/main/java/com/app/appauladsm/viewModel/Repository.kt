@@ -2,6 +2,7 @@ package com.app.appauladsm.viewModel
 
 import com.app.appauladsm.roomDB.Pessoa
 import com.app.appauladsm.roomDB.PessoaDatabase
+import kotlinx.coroutines.flow.Flow
 
 class Repository(val db: PessoaDatabase) {
     suspend fun upsertPessoa(pessoa: Pessoa) {
@@ -12,7 +13,5 @@ class Repository(val db: PessoaDatabase) {
         db.pessoaDao().deletePessoa(pessoa)
     }
 
-    fun getAllPessoas() {
-        db.pessoaDao().getAllPessoas()
-    }
+    fun getAllPessoas(): Flow<List<Pessoa>> =  db.pessoaDao().getAllPessoas()
 }
